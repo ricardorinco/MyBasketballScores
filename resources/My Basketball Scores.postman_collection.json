@@ -1,0 +1,92 @@
+{
+	"info": {
+		"_postman_id": "fa79301d-af79-4e38-8bf9-cd6d1e96147e",
+		"name": "My Basketball Scores",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Scores",
+			"item": [
+				{
+					"name": "Adicionar Nova Pontuação",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "9469fe5a-ad8a-428a-8b82-6b342c4c9e0d",
+								"exec": [
+									"const moment = require('moment');\r",
+									"pm.globals.set('GameDate', moment().format('YYYY-MM-DD'));\r",
+									"pm.globals.set('TotalScore', randomInt(1, 80) );\r",
+									"\r",
+									"function randomInt(min, max) {\r",
+									"\treturn min + Math.floor((max - min) * Math.random());\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"GameDate\": \"{{GameDate}}\",\r\n    \"TotalScore\": {{TotalScore}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44390/api/v1/score/add",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44390",
+							"path": [
+								"api",
+								"v1",
+								"score",
+								"add"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Reports",
+			"item": [
+				{
+					"name": "Relatório da Temporada",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44390/api/v1/season-report",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44390",
+							"path": [
+								"api",
+								"v1",
+								"season-report"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

@@ -1,4 +1,4 @@
-﻿using prmToolkit.NotificationPattern;
+﻿using Flunt.Notifications;
 using System;
 
 namespace YouLearn.Domain.Entities.Base

@@ -13,14 +13,29 @@ namespace MyBasketballScores.Domain.Services
         {
             this.scoreRepository = scoreRepository;
         }
+
         public ScoreResponse Save(ScoreRequest request)
         {
-            // TODO: Tratamento para verificar se a pontuação inserida é um novo recorde pessoal
-            var score = new Score(request.GameDate, request.Total, true);
+            bool newRecord = false;
+            var lastMaxScore = GetMaxScore();
 
-            scoreRepository.Save(score);
+            if (request.TotalScore > lastMaxScore.TotalScore && lastMaxScore.TotalScore > 0)
+            {
+                newRecord = true;
+            }
+
+            var score = new Score(request.GameDate, request.TotalScore, newRecord);
+            if (score.Valid)
+            {
+                scoreRepository.Save(score);
+            }
 
             return (ScoreResponse)score;
+        }
+
+        public LastMaxScoreResponse GetMaxScore()
+        {
+            return (LastMaxScoreResponse)scoreRepository.GetMaxScore();
         }
     }
 }

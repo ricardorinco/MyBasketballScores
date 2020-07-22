@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Flunt.Notifications;
+using System;
+using System.Collections.Generic;
 
 namespace MyBasketballScores.Domain.Arguments.Score
 {
@@ -10,6 +12,7 @@ namespace MyBasketballScores.Domain.Arguments.Score
         public int TotalScore { get; set; }
         public bool IsRecord { get; set; }
 
+        public IReadOnlyCollection<Notification> Notifications { get; private set; }
 
         public static explicit operator ScoreResponse(Entities.Score score)
         {
@@ -18,8 +21,10 @@ namespace MyBasketballScores.Domain.Arguments.Score
                 Id = score.Id,
 
                 GameDate = score.GameDate,
-                TotalScore = score.TotalScore.Value,
-                IsRecord = score.IsRecord
+                TotalScore = score.TotalScore,
+                IsRecord = score.IsRecord,
+
+                Notifications = score.Notifications
             };
         }
     }
