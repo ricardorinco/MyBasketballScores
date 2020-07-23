@@ -12,7 +12,7 @@ namespace MyBasketballScores.Domain.Arguments.Score
         public int TotalScore { get; set; }
         public bool IsRecord { get; set; }
 
-        public IReadOnlyCollection<Notification> Notifications { get; private set; }
+        public IReadOnlyCollection<Notification> Notifications { get; set; }
 
         public static explicit operator ScoreResponse(Entities.Score score)
         {

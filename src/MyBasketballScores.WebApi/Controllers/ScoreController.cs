@@ -43,7 +43,8 @@ namespace MyBasketballScores.WebApi.Controllers
             }
             else
             {
-                return BadRequest(new { Errors = response.Notifications });
+                response.Notifications = response.Notifications;
+                return BadRequest(response);
             }
         }
     }
