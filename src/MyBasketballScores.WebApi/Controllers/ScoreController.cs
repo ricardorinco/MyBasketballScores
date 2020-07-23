@@ -22,7 +22,7 @@ namespace MyBasketballScores.WebApi.Controllers
 
         [HttpPost]
         [Route("add")]
-        [ProducesResponseType(200)]
+        [ProducesResponseType(201)]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
         public ActionResult<ScoreResponse> Add([FromBody]ScoreRequest request)
@@ -34,7 +34,7 @@ namespace MyBasketballScores.WebApi.Controllers
                 {
                     unitOfWork.Commit();
 
-                    return Ok(response);
+                    return Created(string.Empty, response);
                 }
                 catch (Exception ex)
                 {

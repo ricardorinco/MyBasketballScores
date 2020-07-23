@@ -1,4 +1,5 @@
 ﻿using Flunt.Validations;
+using MyBasketballScores.Domain.Resources;
 using System;
 using YouLearn.Domain.Entities.Base;
 
@@ -10,8 +11,19 @@ namespace MyBasketballScores.Domain.Entities
         public Score(DateTime gameDate, int totalScore, bool isRecord)
         {
             AddNotifications(new Contract()
-                .IsBetween(gameDate, new DateTime(DateTime.Now.Year, 01, 01), DateTime.Now, "Data do Jogo", "Informe uma data válida")
-                .IsGreaterOrEqualsThan(totalScore, 0, "Pontuação", "Informe um valor válido")
+                .IsBetween(
+                    gameDate,
+                    new DateTime(DateTime.Now.Year, 01, 01),
+                    DateTime.Now,
+                    NotificationMessages.GameDateProperty,
+                    NotificationMessages.GameDateInvalid
+                )
+                .IsGreaterOrEqualsThan(
+                    totalScore,
+                    0,
+                    NotificationMessages.TotalScoreProperty,
+                    NotificationMessages.TotalScoreInvalid
+                )
             );
 
             GameDate = gameDate;

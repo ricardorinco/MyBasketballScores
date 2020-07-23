@@ -26,6 +26,41 @@
 								],
 								"type": "text/javascript"
 							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "cc6cc0a2-5f69-4475-b42b-be19b901edac",
+								"exec": [
+									"var schema = {\r",
+									"    'id': { 'type': 'string' },\r",
+									"    'gameDate': { 'type': 'string' },\r",
+									"    'totalScore': { 'type': 'integer' },\r",
+									"    'isRecord': { 'type': 'boolean' },\r",
+									"    'notifications': { 'type': 'object' }\r",
+									"};\r",
+									"\r",
+									"pm.test('Status Created (201) is ok', () => {\r",
+									"    pm.response.to.have.status(201);\r",
+									"    pm.response.to.have.status('Created');\r",
+									"});\r",
+									"\r",
+									"pm.test('Response schema data is ok', () => {\r",
+									"    const response = pm.response.json();\r",
+									"    pm.expect(tv4.validate(response, schema)).to.be.true;    \r",
+									"});\r",
+									"\r",
+									"pm.test('Response data is ok', () => {\r",
+									"    const response = pm.response.json();\r",
+									"\r",
+									"    pm.expect(response.gameDate).to.be.eql(`${pm.globals.get('GameDate')}T00:00:00`);\r",
+									"    pm.expect(response.totalScore).to.be.eql(pm.globals.get('TotalScore'));\r",
+									"    pm.expect(response.notifications).to.be.eql([]);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
 						}
 					],
 					"request": {
@@ -34,6 +69,91 @@
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"GameDate\": \"{{GameDate}}\",\r\n    \"TotalScore\": {{TotalScore}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44390/api/v1/score/add",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44390",
+							"path": [
+								"api",
+								"v1",
+								"score",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Adicionar Nova Pontuação Inválida",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "d84edb56-6c8f-4338-b94a-b78da6cbb2c8",
+								"exec": [
+									"const moment = require('moment');\r",
+									"pm.globals.set('GameDateInvalid', moment('2010-08-20'));\r",
+									"pm.globals.set('TotalScoreInvalid', randomInt(-99, -1) );\r",
+									"\r",
+									"function randomInt(min, max) {\r",
+									"\treturn min + Math.floor((max - min) * Math.random());\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "52adcebd-a326-4b3b-b4fb-f57416cb56d9",
+								"exec": [
+									"var schema = {\r",
+									"    'errors': [\r",
+									"        { 'property': { 'type': 'string' } },\r",
+									"        { 'message': { 'type': 'string' } },\r",
+									"    ]\r",
+									"};\r",
+									"\r",
+									"pm.test('Status Bad Request (400) is ok', () => {\r",
+									"    pm.response.to.have.status(400);\r",
+									"    pm.response.to.have.status('Bad Request');\r",
+									"});\r",
+									"\r",
+									"pm.test('Response schema data is ok', () => {\r",
+									"    const response = pm.response.json();\r",
+									"    pm.expect(tv4.validate(response, schema)).to.be.true;    \r",
+									"});\r",
+									"\r",
+									"pm.test('Response data is ok', () => {\r",
+									"    const response = pm.response.json();\r",
+									"\r",
+									"    pm.expect(response.errors[0].property).to.be.eql('Data do Jogo');\r",
+									"    pm.expect(response.errors[0].message).to.be.eql('Informe uma data válida');\r",
+									"\r",
+									"    pm.expect(response.errors[1].property).to.be.eql('Pontuação');\r",
+									"    pm.expect(response.errors[1].message).to.be.eql('Informe um valor válido');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"GameDate\": \"{{GameDateInvalid}}\",\r\n    \"TotalScore\": {{TotalScoreInvalid}}\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -65,6 +185,49 @@
 			"item": [
 				{
 					"name": "Relatório da Temporada",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "484eb80f-df3c-4698-a09c-a6a40b55b61a",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "02908fb8-49aa-413b-8639-bb29f1851abc",
+								"exec": [
+									"var schema = {\r",
+									"    'season': {\r",
+									"        'start': { 'type': 'string' },\r",
+									"        'end': { 'type': 'string' }\r",
+									"    },\r",
+									"    'totalGamesPlayed': { 'type': 'integer' },\r",
+									"    'totalSeasonScores': { 'type': 'integer' },\r",
+									"    'averageSeasonScores': { 'type': 'integer' },\r",
+									"    'maxScore': { 'type': 'integer' },\r",
+									"    'minimumScore': { 'type': 'integer' },\r",
+									"    'totalRecordBroken': { 'type': 'integer' },\r",
+									"};\r",
+									"\r",
+									"pm.test('Status OK (200) is ok', () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pm.response.to.have.status('OK');\r",
+									"});\r",
+									"\r",
+									"pm.test('Response schema data is Ok', () => {\r",
+									"    const response = pm.response.json();\r",
+									"    pm.expect(tv4.validate(response, schema)).to.be.true;    \r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
