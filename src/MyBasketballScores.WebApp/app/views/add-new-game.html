@@ -1,0 +1,53 @@
+<div class="row">
+    <div class="col-md-12 alert-content">
+        <div class="alert alert-success alert-dismissible fade show" role="alert" ng-if="successMessage">
+            {{ successMessage }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        <div class="alert alert-danger alert-dismissible fade show" role="alert" ng-repeat="errorMessage in errorMessages">
+            {{ errorMessage }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+    <h1 class="h2">{{ title }}</h1>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <form ng-submit="addScores()" name="addNewScoreForm">
+            <div class="form-group">
+                <label for="gameDateInput">Data do jogo</label>
+                <input
+                    type="date"
+                    date-format
+                    class="form-control"
+                    ng-model="scoreRequest.gameDate"
+                    ng-maxlength="10"
+                    id="gameDateInput"
+                    required
+                />
+            </div>
+            <div class="form-group">
+                <label for="totalScoreInput">Quantos pontos você fez</label>
+                <input
+                    type="number"
+                    class="form-control"
+                    ng-model="scoreRequest.totalScore"
+                    id="totalScoreInput"
+                    required
+                />
+            </div>
+            <button type="submit" class="btn btn-primary btn-form btn-block" ng-disabled="addNewScoreForm.$invalid">
+                Salvar
+            </button>
+        </form>
+    </div>
+</div>

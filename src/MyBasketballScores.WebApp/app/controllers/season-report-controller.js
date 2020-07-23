@@ -4,14 +4,14 @@ app.controller('SeasonReportController', function($scope, myBasketballScoresWebA
     $scope.alertMessage = '';
     $scope.errorMessage = '';
     
-    $scope.seasonReport = {};
+    $scope.seasonReportResponse = {};
 
     loadReport();
 
     function loadReport() {
         myBasketballScoresWebApi.getSeasonReport().then(
             function(response) {
-                $scope.seasonReport = response.data;
+                $scope.seasonReportResponse = response.data;
                 
                 if (response.data.totalGamesPlayed === 0) {
                     $scope.alertMessage = 'Não foram encontrados registros de jogos até o momentos.';

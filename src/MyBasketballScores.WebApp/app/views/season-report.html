@@ -1,15 +1,14 @@
-
 <div class="row">
     <div class="col-md-12 alert-content">
         <div class="alert alert-warning alert-dismissible fade show" role="alert" ng-if="alertMessage">
-            {{alertMessage}}
+            {{ alertMessage }}
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        
+
         <div class="alert alert-danger alert-dismissible fade show" role="alert" ng-if="errorMessage">
-            {{errorMessage}}
+            {{ errorMessage }}
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -19,9 +18,9 @@
 
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
     <h1 class="h2">{{ title }}</h1>
-    <h6 ng-if="seasonReport.totalGamesPlayed > 0">
-        {{ seasonReport.season.start | date: 'dd/MM/yyyy' }} até
-        {{ seasonReport.season.end | date: 'dd/MM/yyyy' }}
+    <h6 ng-if="seasonReportResponse.totalGamesPlayed > 0">
+        {{ seasonReportResponse.season.start | date: 'dd/MM/yyyy' }} até
+        {{ seasonReportResponse.season.end | date: 'dd/MM/yyyy' }}
     </h6>
 </div>
 
@@ -29,33 +28,33 @@
     <div class="list-group-item">
         <div class="row">
             <div class="col-md-10">Jogos disputados</div>
-            <div class="col-md-2 text-score">{{ seasonReport.totalGamesPlayed }}</div>
+            <div class="col-md-2 text-score">{{ seasonReportResponse.totalGamesPlayed }}</div>
         </div>
     </div>
     <div class="list-group-item">
         <div class="row">
             <div class="col-md-10">Total de pontos marcados na temporada</div>
-            <div class="col-md-2 text-score">{{ seasonReport.totalSeasonScores }}</div>
+            <div class="col-md-2 text-score">{{ seasonReportResponse.totalSeasonScores }}</div>
         </div>
     </div>
     <div class="list-group-item">
         <div class="row">
             <div class="col-md-10">Média de pontos por jogo</div>
             <div class="col-md-2 text-score">
-                {{ seasonReport.averageSeasonScores }}
+                {{ seasonReportResponse.averageSeasonScores }}
             </div>
         </div>
     </div>
     <div class="list-group-item">
         <div class="row">
             <div class="col-md-10">Maior pontuação em um jogo</div>
-            <div class="col-md-2 text-score">{{ seasonReport.maxScore }}</div>
+            <div class="col-md-2 text-score">{{ seasonReportResponse.maxScore }}</div>
         </div>
     </div>
     <div class="list-group-item">
         <div class="row">
             <div class="col-md-10">Menor pontuação em um jogo</div>
-            <div class="col-md-2 text-score">{{ seasonReport.minimumScore }}</div>
+            <div class="col-md-2 text-score">{{ seasonReportResponse.minimumScore }}</div>
         </div>
     </div>
     <div class="list-group-item">
@@ -63,7 +62,7 @@
             <div class="col-md-10">
                 Quantidade de vezes que bateu o próprio recorde
             </div>
-            <div class="col-md-2 text-score">{{ seasonReport.totalRecordBroken }}</div>
+            <div class="col-md-2 text-score">{{ seasonReportResponse.totalRecordBroken }}</div>
         </div>
     </div>
 </div>
