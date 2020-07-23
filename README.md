@@ -7,3 +7,7 @@
 # Resources
  - Postman Collection
  - Postman UnitTest - Api
+
+# Frontend
+ - npm install
+ - npm run start

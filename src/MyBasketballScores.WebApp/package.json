@@ -1,0 +1,17 @@
+{
+    "name": "mybasketballscores.webapp",
+    "version": "1.0.0",
+    "description": "My Basketball Scores",
+    "main": "app.js",
+    "scripts": {
+        "start": "http-server -o"
+    },
+    "author": "Rinco, Ricardo",
+    "license": "MIT",
+    "dependencies": {
+        "angular": "^1.7.9",
+        "angular-route": "^1.7.9",
+        "bootstrap": "^4.4.1",
+        "http-server": "^0.12.1"
+    }
+}
