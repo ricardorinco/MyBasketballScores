@@ -16,7 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\MyBasketballScores.Domain\MyBasketballScores.Domain.csproj" />
+    <ProjectReference Include="..\..\src\MyBasketballScores.Infra.Data\MyBasketballScores.Infra.Data.csproj" />
+    <ProjectReference Include="..\MyBasketballScores.Domain.Test\MyBasketballScores.Domain.Test.csproj" />
   </ItemGroup>
 
 </Project>
