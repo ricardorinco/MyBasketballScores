@@ -17,14 +17,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyBasketballScores.Infra.Da
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyBasketballScores.Shared", "src\MyBasketballScores.Shared\MyBasketballScores.Shared.csproj", "{F4904E68-C476-4E89-A831-221337B2A14B}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0 - Docs", "0 - Docs", "{0AD272E1-4426-4ADB-BD8A-7F5EE8703229}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Docs", "1 - Docs", "{0AD272E1-4426-4ADB-BD8A-7F5EE8703229}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyBasketballScores.WebApi", "src\MyBasketballScores.WebApi\MyBasketballScores.WebApi.csproj", "{EF3C791C-9968-4B62-847C-7C7FF35B7C80}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyBasketballScores.Domain.Test", "tests\MyBasketballScores.Domain.Test\MyBasketballScores.Domain.Test.csproj", "{1F233EEA-DF96-4122-9914-230B91BB7270}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyBasketballScores.Domain.Test", "tests\MyBasketballScores.Domain.Test\MyBasketballScores.Domain.Test.csproj", "{1F233EEA-DF96-4122-9914-230B91BB7270}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
