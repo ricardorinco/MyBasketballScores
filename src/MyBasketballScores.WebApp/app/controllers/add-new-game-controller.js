@@ -23,14 +23,16 @@ app.controller('AddNewGameController', function($scope, myBasketballScoresWebApi
                 }
             },
             function(error) {
+                if (error.data === null) {
+                    $scope.errorMessages.push('Ocorreu um erro ao lançar os pontos da partida.')
+                    console.error('Error:', error);
+                }
+
                 if (error.data.notifications.length > 0) {
                     error.data.notifications.forEach((notification) => {
                         $scope.errorMessages.push(`${notification.property}: ${notification.message}.`);
                     });
                     
-                } else{
-                    $scope.errorMessages.push('Ocorreu um erro ao lançar os pontos da partida.')
-                    console.error('Error:', error);
                 }
             }
         );
