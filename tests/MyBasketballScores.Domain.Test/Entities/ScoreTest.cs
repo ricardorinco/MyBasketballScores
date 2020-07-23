@@ -1,6 +1,7 @@
 ﻿using Bogus;
 using MyBasketballScores.Domain.Entities;
 using MyBasketballScores.Domain.Resources;
+using MyBasketballScores.Domain.Test.Utils;
 using System;
 using System.Linq;
 using Xunit;
@@ -28,11 +29,8 @@ namespace MyBasketballScores.Domain.Test.Entities
         [Fact]
         public void Should_Create_Score()
         {
-            var gameDate = faker.Date.Between(
-                new DateTime(DateTime.Now.Year, 01, 01),
-                new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day)
-            );
-            var totalScore = faker.Random.Int(0, 99);
+            var gameDate = DataGenerator.GameDateValid;
+            var totalScore = DataGenerator.TotalScoreValid;
 
             var expected = new { GameDate = gameDate, TotalScore = totalScore, IsRecord = isRecord };
 
@@ -46,11 +44,8 @@ namespace MyBasketballScores.Domain.Test.Entities
         [Fact]
         public void Not_Should_Create_Score()
         {
-            var gameDate = faker.Date.Between(
-                new DateTime(2010, 01, 01),
-                new DateTime(2010, 12, 31)
-            );
-            var totalScore = faker.Random.Int(-99, -1);
+            var gameDate = DataGenerator.GameDateInvalid;
+            var totalScore = DataGenerator.TotalScoreInvalid;
 
             var score = new Score(gameDate, totalScore, isRecord);
 
@@ -68,10 +63,7 @@ namespace MyBasketballScores.Domain.Test.Entities
         [Fact]
         public void Not_Should_Create_Score_With_GameDate_Invalid()
         {
-            var gameDate = faker.Date.Between(
-                new DateTime(2010, 01, 01),
-                new DateTime(2010, 12, 31)
-            );
+            var gameDate = DataGenerator.GameDateInvalid;
             var totalScore = faker.Random.Int(1, 99);
 
             var score = new Score(gameDate, totalScore, isRecord);
@@ -86,11 +78,8 @@ namespace MyBasketballScores.Domain.Test.Entities
         [Fact]
         public void Not_Should_Create_Score_With_TotalScore_Invalid()
         {
-            var gameDate = faker.Date.Between(
-                new DateTime(DateTime.Now.Year, 01, 01),
-                new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day)
-            );
-            var totalScore = faker.Random.Int(-99, -1);
+            var gameDate = DataGenerator.GameDateValid;
+            var totalScore = DataGenerator.TotalScoreInvalid;
 
             var score = new Score(gameDate, totalScore, isRecord);
 
